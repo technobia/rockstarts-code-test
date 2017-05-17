@@ -1,0 +1,35 @@
+{
+  "name": "presentation",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "frontend:run": "webpack-dev-server",
+    "server:run": "node ./server & echo $! > server.pid",
+    "server:kill": "kill -9 $(cat server.pid) && rm server.pid"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-plugin-transform-decorators-legacy": "^1.3.4",
+    "body-parser": "^1.15.2",
+    "cors": "^2.8.1",
+    "express": "^4.14.0",
+    "lodash": "^4.16.3",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "react-redux": "^4.4.5",
+    "react-router-redux": "^4.0.6",
+    "redux": "^3.6.0",
+    "whatwg-fetch": "^1.0.0"
+  },
+  "devDependencies": {
+    "babel-core": "^6.17.0",
+    "babel-loader": "^6.2.5",
+    "babel-preset-es2015": "^6.16.0",
+    "babel-preset-react": "^6.16.0",
+    "babel-preset-stage-0": "^6.16.0",
+    "webpack": "^1.13.2",
+    "webpack-dev-server": "^1.16.1"
+  },
+  "description": ""
+}
