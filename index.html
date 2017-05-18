@@ -8,37 +8,7 @@
 	<title>8Bit Rockstarts Code Test</title>
 </head>
 <body>
-	<h1 id="bigOne"></h1>
 	<div id="app"></div>
 	<script type="text/javascript" src="build/index.js"></script>
-	<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
-	<script>
-        // Initialize Firebase
-        var config = {
-            apiKey: "AIzaSyAK7ily6mb6zjKBMeCXGeRVyWcgpW-4WJg",
-            authDomain: "bitrockstarts.firebaseapp.com",
-            databaseURL: "https://bitrockstarts.firebaseio.com",
-            projectId: "bitrockstarts",
-            storageBucket: "bitrockstarts.appspot.com",
-            messagingSenderId: "966158826896"
-        };
-        firebase.initializeApp(config);
-
-        var bigOne = document.getElementById('bigOne');
-        var dbRef = firebase.database().ref().child('address');
-        dbRef.on('value', snap => bigOne.innerText = snap.val().E.streetName);
-
-        function writeUserData(streetName, ward, district, city, country, addressId) {
-            firebase.database().ref('address/' + addressId).set({
-                streetName: streetName,
-                ward: ward,
-				district: district,
-				city: city,
-				country: country
-            });
-        }
-
-        writeUserData('A', 'B', 3, 'C', 'D', 'E');
-	</script>
 </body>
 </html>
