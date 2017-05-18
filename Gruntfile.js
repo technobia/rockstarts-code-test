@@ -25,7 +25,7 @@ module.exports = function(grunt) {
         },
         watch: {
             app: {
-                files: ['src/**/*'],
+                files: ['src/**/*', 'assets/scss/**/*.scss'],
                 tasks: ['webpack:build-dev'],
                 options: {
                     spawn: false

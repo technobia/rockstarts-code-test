@@ -4,6 +4,7 @@ import {Provider} from 'react-redux';
 import {createStore} from 'redux';
 import Homepage from './src/Homepage.container.jsx'
 import HomepageReducer from './src/Homepage.reducer.jsx';
+import './src/assets/scss/main.scss';
 
 export const store = createStore(HomepageReducer);
 
