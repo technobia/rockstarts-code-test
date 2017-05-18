@@ -1,4 +1,4 @@
-import {featchAddressList} from './services/Address.service';
+import {fetchAddressList} from './services/Address.service';
 
 export const HomepageStateToPropsBinding = (state) => {
     return {
@@ -7,5 +7,5 @@ export const HomepageStateToPropsBinding = (state) => {
 };
 
 export const HomepageDispatchToPropsBinding = (dispatch, ownProps) => ({
-    featchAddressList: () => featchAddressList().then(dispatch)
+    fetchAddressList: () => fetchAddressList().then(dispatch)
 });
