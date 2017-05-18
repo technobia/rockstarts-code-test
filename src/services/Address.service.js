@@ -2,7 +2,10 @@
  * Created by apium on 17/05/2017.
  */
 
-import {FETCH_ADDRESS_SUCCESS} from '../Homepage.reducer';
+import {
+    FETCH_ADDRESS_SUCCESS,
+    CREATE_ADDRESS_SUCCESS
+} from '../Homepage.reducer';
 import * as _ from 'lodash';
 import * as firebase from 'firebase';
 
@@ -22,9 +25,21 @@ export function fetchAddressListSuccess(addressList) {
     };
 }
 
+export function createAddressSuccess() {
+    return {
+        type: CREATE_ADDRESS_SUCCESS,
+        success: true
+    };
+}
+
 export function fetchAddressList() {
     const address = firebase.database().ref('/addressList').once('value');
     return address.then(resp => fetchAddressListSuccess(makeAddressList(resp)));
+}
+
+export function createAddressRow(formData) {
+    return writeAddressRow(formData, Guid())
+        .then(createAddressSuccess);
 }
 
 function makeAddressList(resp) {
@@ -38,12 +53,22 @@ function makeAddressList(resp) {
     return result;
 }
 
-function writeUserData(streetName, ward, district, city, country, addressId) {
-    firebase.database().ref('addressList/' + addressId).set({
-        streetName: streetName,
-        ward: ward,
-        district: district,
-        city: city,
-        country: country
+function writeAddressRow(data, addressId) {
+    return firebase.database().ref('addressList/' + addressId).set({
+        streetName: data.streetName,
+        ward: data.ward,
+        district: data.district,
+        city: data.city,
+        country: data.country
     });
+}
+
+function Guid() {
+    let s4 = function() {
+        return Math.floor((1 + Math.random()) * 0x10000)
+            .toString(16)
+            .substring(1);
+    };
+
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }

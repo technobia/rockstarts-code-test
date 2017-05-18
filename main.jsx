@@ -1,12 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
-import {createStore} from 'redux';
+import {reducer as formReducer} from 'redux-form';
+import {createStore, combineReducers} from 'redux';
 import Homepage from './src/Homepage.container.jsx'
 import HomepageReducer from './src/Homepage.reducer.jsx';
 import './src/assets/scss/main.scss';
 
-export const store = createStore(HomepageReducer);
+const reducers = {
+    homepage: HomepageReducer,
+    form: formReducer
+};
+
+const reducer = combineReducers(reducers);
+const store = createStore(reducer);
 
 ReactDOM.render(
     <Provider store={store}>
