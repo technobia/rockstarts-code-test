@@ -4,7 +4,8 @@
 
 import {
     FETCH_ADDRESS_SUCCESS,
-    CREATE_ADDRESS_SUCCESS
+    CREATE_ADDRESS_SUCCESS,
+    REMOVE_ADDRESS_SUCCESS
 } from '../Homepage.reducer';
 import * as _ from 'lodash';
 import * as firebase from 'firebase';
@@ -32,17 +33,29 @@ export function createAddressSuccess() {
     };
 }
 
+export function removeAddressSuccess() {
+    return {
+        type: REMOVE_ADDRESS_SUCCESS,
+        success: true
+    };
+}
+
 export function fetchAddressList() {
     const address = firebase.database().ref('/addressList').once('value');
     return address.then(resp => fetchAddressListSuccess(makeAddressList(resp)));
 }
 
 export function createAddressRow(formData) {
-    return writeAddressRow(formData, Guid())
+    return addAddress(formData, Guid())
         .then(createAddressSuccess);
 }
 
-function makeAddressList(resp) {
+export function removeAddressRow(addressId) {
+    return removeAddress(addressId)
+        .then(removeAddressSuccess);
+}
+
+const makeAddressList = (resp) => {
     const result = [];
     _.chain(resp.val())
         .keys()
@@ -51,24 +64,29 @@ function makeAddressList(resp) {
         })
         .value();
     return result;
-}
+};
 
-function writeAddressRow(data, addressId) {
+const addAddress = (data, addressId) => {
     return firebase.database().ref('addressList/' + addressId).set({
         streetName: data.streetName,
         ward: data.ward,
         district: data.district,
         city: data.city,
-        country: data.country
+        country: data.country,
+        id: addressId
     });
-}
+};
 
-function Guid() {
-    let s4 = function() {
+const removeAddress = (addressId) => {
+    return firebase.database().ref('addressList/' + addressId).remove();
+};
+
+const Guid = () => {
+    let s4 = () => {
         return Math.floor((1 + Math.random()) * 0x10000)
             .toString(16)
             .substring(1);
     };
 
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
-}
+};

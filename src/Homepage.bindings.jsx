@@ -1,4 +1,4 @@
-import {fetchAddressList, createAddressRow} from './services/Address.service';
+import {fetchAddressList, createAddressRow, removeAddressRow} from './services/Address.service';
 import {fetchLocationFromLatLng} from './services/Google.service';
 
 export const HomepageStateToPropsBinding = (state) => {
@@ -11,5 +11,6 @@ export const HomepageStateToPropsBinding = (state) => {
 export const HomepageDispatchToPropsBinding = (dispatch, ownProps) => ({
     fetchAddressList: () => fetchAddressList().then(dispatch),
     createAddressRow: (values) => createAddressRow(values).then(dispatch),
+    removeAddressRow: (addressId) => removeAddressRow(addressId).then(dispatch),
     fetchLocationFromLatLng: (data) => fetchLocationFromLatLng(data).then(dispatch)
 });

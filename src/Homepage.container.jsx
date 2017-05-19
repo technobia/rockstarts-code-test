@@ -27,7 +27,7 @@ export default class Homepage extends React.Component {
         });
     }
 
-    submit = (values) => {
+    submit(values) {
         if (keys(values).length < 5) return;
         this.props.createAddressRow(values).then(resp => {
             if (resp.success) this.props.fetchAddressList()
@@ -65,6 +65,12 @@ export default class Homepage extends React.Component {
         return result;
     }
 
+    remove(id) {
+        this.props.removeAddressRow(id).then(resp => {
+            if (resp.success) this.props.fetchAddressList()
+        });
+    }
+
     render() {
         return (
             <div className="row" style={{marginTop: 15}}>
@@ -75,7 +81,7 @@ export default class Homepage extends React.Component {
 
                             <div className="panel-body clearfix">
                                 <div className="row">
-                                    <AddressForm onSubmit={this.submit}
+                                    <AddressForm onSubmit={::this.submit}
                                                  initialValues={this.state.formData}/>
                                 </div>
                             </div>
@@ -95,6 +101,7 @@ export default class Homepage extends React.Component {
                         <th>District</th>
                         <th>City</th>
                         <th>Country</th>
+                        <th>&nbsp;</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -106,6 +113,10 @@ export default class Homepage extends React.Component {
                                 <td>{e.district}</td>
                                 <td>{e.city}</td>
                                 <td>{e.country}</td>
+                                <td style={{textAlign: 'center'}}>
+                                    <button className="btn btn-danger" onClick={() => this.remove(e.id)}>Remove</button>&nbsp;
+                                    <button className="btn btn-primary">Edit</button>
+                                </td>
                             </tr>
                         })
                     }
