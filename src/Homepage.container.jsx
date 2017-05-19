@@ -34,8 +34,8 @@ export default class Homepage extends React.Component {
     render() {
         return (
             <div className="row" style={{marginTop: 15}}>
-                <div className="col-md-6">
-                    <div className="row">
+                <div className="row">
+                    <div className="col-md-6">
                         <div className="panel panel-default">
                             <div className="panel-heading">Add address with form</div>
 
@@ -46,13 +46,13 @@ export default class Homepage extends React.Component {
                             </div>
                         </div>
                     </div>
+
+                    <div className="col-md-6">
+                        <GoogleMap/>
+                    </div>
                 </div>
 
-                <div className="col-md-6">
-                    <GoogleMap/>
-                </div>
-
-                <table className="table table-bordered table-striped">
+                <table className="table table-bordered table-striped" style={{marginTop: 30}}>
                     <thead>
                     <tr>
                         <th>Street Name</th>

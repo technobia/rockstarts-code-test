@@ -12,6 +12,13 @@ const coords = {
 const params = {v: '3.exp', key: 'AIzaSyCYQMCqEZ8cd96y5wt7SPVRyJOCavVPW5Y', libraries: 'places'};
 
 export default class GoogleMap extends Component {
+    constructor(props, context) {
+        super(props, context);
+        this.state = {
+            maker: {}
+        }
+    }
+
     onMapCreated(map) {
         map.setOptions({
             disableDefaultUI: true
@@ -22,15 +29,15 @@ export default class GoogleMap extends Component {
         console.log('onDragEnd', e);
     }
 
-    onCloseClick() {
-        console.log('onCloseClick');
-    }
-
-    onClick(e) {
-        console.log('onClick', e);
+    onMapClick(e) {
+        const { latLng } = e;
+        let lat = latLng.lat();
+        let lng = latLng.lng();
+        this.setState({marker: {lat, lng}}, () => console.log(lat, lng));
     }
 
     render() {
+        let {marker} = this.state;
         return (
             <Gmaps
                 width={'100%'}
@@ -40,22 +47,13 @@ export default class GoogleMap extends Component {
                 zoom={12}
                 loadingMessage={'Be happy'}
                 params={params}
-                onMapCreated={this.onMapCreated}>
-                <Marker
-                    lat={coords.lat}
-                    lng={coords.lng}
-                    draggable={true}
-                    onDragEnd={this.onDragEnd} />
-                <InfoWindow
-                    lat={coords.lat}
-                    lng={coords.lng}
-                    content={'Hello, React :)'}
-                    onCloseClick={this.onCloseClick} />
-                <Circle
-                    lat={coords.lat}
-                    lng={coords.lng}
-                    radius={500}
-                    onClick={this.onClick} />
+                onClick={::this.onMapClick}
+                onMapCreated={::this.onMapCreated}>
+                {!!marker ? <Marker
+                        lat={marker.lat}
+                        lng={marker.lng}
+                        draggable={true}
+                        onDragEnd={this.onDragEnd} /> : null}
             </Gmaps>
         );
     }
