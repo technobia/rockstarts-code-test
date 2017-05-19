@@ -92,7 +92,7 @@ export default class Homepage extends React.Component {
                             <div className="panel-heading">Add address with suggestion</div>
 
                             <div className="panel-body clearfix">
-                                <Suggestion />
+                                <Suggestion fetchLocationFromLatLng={this.props.fetchLocationFromLatLng}/>
                             </div>
                         </div>
                     </div>
