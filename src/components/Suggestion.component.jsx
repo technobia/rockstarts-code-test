@@ -15,6 +15,7 @@ export default class Suggestion extends Component {
         geocodeByAddress(this.state.address)
             .then(results => getLatLng(results[0]))
             .then(latLng => this.props.fetchLocationFromLatLng({...latLng}))
+            .then(() => this.setState({address: ''}))
             .catch(error => console.error('Error', error))
     };
 

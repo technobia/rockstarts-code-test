@@ -10,7 +10,7 @@ let initialState = {
 export default function Homepage(state = initialState, action)  {
     switch (action.type) {
         case FETCH_ADDRESS_SUCCESS:
-            return {...state, addressList: action.addressList };
+            return {...state, addressList: action.addressList, locationData: null };
         case CREATE_ADDRESS_SUCCESS:
             return {...state};
         case FETCH_LOCATION_SUCCESS:

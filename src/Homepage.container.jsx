@@ -12,7 +12,6 @@ export default class Homepage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            addressList: [],
             formData: {}
         };
     }
@@ -29,7 +28,6 @@ export default class Homepage extends React.Component {
     }
 
     submit(values) {
-        if (keys(values).length < 5) return;
         this.props.createAddressRow(values).then(resp => {
             if (resp.success) this.props.fetchAddressList()
         });
