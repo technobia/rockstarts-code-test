@@ -31,7 +31,7 @@ export default class GoogleMap extends Component {
         const { latLng } = e;
         let lat = latLng.lat();
         let lng = latLng.lng();
-        this.setState({marker: {lat, lng}}, () => console.log(lat, lng));
+        this.setState({marker: {lat, lng}});
         this.props.fetchLocationFromLatLng({lat, lng});
     }
 
