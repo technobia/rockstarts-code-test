@@ -8,7 +8,7 @@ import {FETCH_LOCATION_SUCCESS} from '../Homepage.reducer';
 function fetchLocationSuccess(data) {
     return {
         type: FETCH_LOCATION_SUCCESS,
-        data: data.results
+        locationData: data.results
     };
 }
 

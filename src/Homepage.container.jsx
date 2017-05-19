@@ -20,7 +20,8 @@ export default class Homepage extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         this.setState({
-            addressList: nextProps.addressList
+            addressList: nextProps.addressList,
+            locationData: nextProps.locationData
         });
     }
 
@@ -41,7 +42,7 @@ export default class Homepage extends React.Component {
 
                             <div className="panel-body clearfix">
                                 <div className="row">
-                                    <AddressForm onSubmit={this.submit} />
+                                    <AddressForm onSubmit={this.submit} locationData={this.state.locationData} />
                                 </div>
                             </div>
                         </div>

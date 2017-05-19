@@ -13,8 +13,7 @@ export default function Homepage(state = initialState, action)  {
         case CREATE_ADDRESS_SUCCESS:
             return {...state};
         case FETCH_LOCATION_SUCCESS:
-            console.log(action);
-            return {...state};
+            return {...state, locationData: action.locationData};
     }
 
     return state;

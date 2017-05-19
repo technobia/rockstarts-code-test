@@ -3,7 +3,8 @@ import {fetchLocationFromLatLng} from './services/Google.service';
 
 export const HomepageStateToPropsBinding = (state) => {
     return {
-        addressList: state.homepage.addressList
+        addressList: state.homepage.addressList,
+        locationData: state.homepage.locationData
     }
 };
 
