@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {map, keys} from 'lodash';
 import {HomepageStateToPropsBinding, HomepageDispatchToPropsBinding} from "./Homepage.bindings.jsx";
 import AddressForm from './components/AddressForm.component.jsx';
+import GoogleMap from './components/GoogleMap.component';
 
 @connect(HomepageStateToPropsBinding, HomepageDispatchToPropsBinding)
 export default class Homepage extends React.Component {
@@ -33,6 +34,24 @@ export default class Homepage extends React.Component {
     render() {
         return (
             <div className="row" style={{marginTop: 15}}>
+                <div className="col-md-6">
+                    <div className="row">
+                        <div className="panel panel-default">
+                            <div className="panel-heading">Add address with form</div>
+
+                            <div className="panel-body clearfix">
+                                <div className="row">
+                                    <AddressForm onSubmit={this.submit} />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="col-md-6">
+                    <GoogleMap/>
+                </div>
+
                 <table className="table table-bordered table-striped">
                     <thead>
                     <tr>
@@ -57,29 +76,6 @@ export default class Homepage extends React.Component {
                     }
                     </tbody>
                 </table>
-
-                <div className="col-md-6">
-                    <div className="panel panel-default">
-                        <div className="panel-heading">Add address with form</div>
-
-                        <div className="panel-body clearfix">
-                            <div className="row">
-                                <AddressForm onSubmit={this.submit} />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="col-md-6">
-                    <div className="panel panel-default">
-                        <div className="panel-heading">Add address with google map</div>
-
-                        <div className="panel-body" style={{padding: 0}}>
-
-                        </div>
-                    </div>
-                </div>
-
             </div>
         )
     }
