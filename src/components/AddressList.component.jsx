@@ -10,10 +10,22 @@ export default class AddressList extends Component {
         super(props);
     }
 
+    onEdit = (e) => {
+        console.log(e);
+    };
+
     render() {
-        let {addressList, onRemove} = this.props;
+        let {addressList, onRemove, onEdit} = this.props;
         return (
             <table className="table table-bordered table-striped" style={{marginTop: 30}}>
+                <colgroup>
+                    <col />
+                    <col />
+                    <col />
+                    <col />
+                    <col />
+                    <col style={{width: 150}}/>
+                </colgroup>
                 <thead>
                 <tr>
                     <th>Street Name</th>
@@ -27,7 +39,7 @@ export default class AddressList extends Component {
                 <tbody>
                 {
                     map(addressList, (e, index) => {
-                        return <AddressRow key={index} element={e} onRemove={onRemove}/>
+                        return <AddressRow key={index} element={e} onRemove={onRemove} onEdit={this.onEdit}/>
                     })
                 }
                 </tbody>
