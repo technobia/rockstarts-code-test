@@ -4,6 +4,7 @@ import {map, keys} from 'lodash';
 import {HomepageStateToPropsBinding, HomepageDispatchToPropsBinding} from "./Homepage.bindings.jsx";
 import AddressForm from './components/AddressForm.component.jsx';
 import GoogleMap from './components/GoogleMap.component';
+import Suggestion from './components/Suggestion.component';
 import {forEach, some} from 'lodash';
 
 @connect(HomepageStateToPropsBinding, HomepageDispatchToPropsBinding)
@@ -84,6 +85,14 @@ export default class Homepage extends React.Component {
                                     <AddressForm onSubmit={::this.submit}
                                                  initialValues={this.state.formData}/>
                                 </div>
+                            </div>
+                        </div>
+
+                        <div className="panel panel-default" style={{marginTop: 15}}>
+                            <div className="panel-heading">Add address with suggestion</div>
+
+                            <div className="panel-body clearfix">
+                                <Suggestion />
                             </div>
                         </div>
                     </div>
