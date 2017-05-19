@@ -59,15 +59,23 @@ export default class Homepage extends React.Component {
                 </table>
 
                 <div className="col-md-6">
-                    <div className="row">
-                        <div className="panel panel-default">
-                            <div className="panel-heading">Add address with form</div>
+                    <div className="panel panel-default">
+                        <div className="panel-heading">Add address with form</div>
 
-                            <div className="panel-body clearfix">
-                                <div className="row">
-                                    <AddressForm onSubmit={this.submit} />
-                                </div>
+                        <div className="panel-body clearfix">
+                            <div className="row">
+                                <AddressForm onSubmit={this.submit} />
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="col-md-6">
+                    <div className="panel panel-default">
+                        <div className="panel-heading">Add address with google map</div>
+
+                        <div className="panel-body" style={{padding: 0}}>
+
                         </div>
                     </div>
                 </div>
