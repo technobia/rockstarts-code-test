@@ -4,20 +4,10 @@
 import React, { Component } from 'react';
 import { Field, reduxForm, reset } from 'redux-form';
 
+
 class AddressForm extends Component {
-    constructor(props) {
-        super(props);
-    }
-
-    componentWillReceiveProps(props) {
-        this.setState({
-            locationData: props.locationData || []
-        })
-    }
-
     render() {
         const { handleSubmit } = this.props;
-        console.log(this.state);
         return (
             <form onSubmit={handleSubmit}>
                 <div className="form-group col-md-6">
@@ -54,5 +44,6 @@ const afterSubmit = (result, dispatch) =>
 
 export default reduxForm({
     form: 'address',
+    enableReinitialize: true,
     onSubmitSuccess: afterSubmit,
 })(AddressForm);
