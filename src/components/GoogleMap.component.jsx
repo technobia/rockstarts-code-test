@@ -14,9 +14,7 @@ const params = {v: '3.exp', key: 'AIzaSyCYQMCqEZ8cd96y5wt7SPVRyJOCavVPW5Y', libr
 export default class GoogleMap extends Component {
     constructor(props, context) {
         super(props, context);
-        this.state = {
-            maker: {}
-        }
+        this.state = {}
     }
 
     onMapCreated(map) {
@@ -34,10 +32,12 @@ export default class GoogleMap extends Component {
         let lat = latLng.lat();
         let lng = latLng.lng();
         this.setState({marker: {lat, lng}}, () => console.log(lat, lng));
+        this.props.fetchLocationFromLatLng({lat, lng});
     }
 
     render() {
         let {marker} = this.state;
+
         return (
             <Gmaps
                 width={'100%'}

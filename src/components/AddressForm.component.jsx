@@ -7,6 +7,7 @@ import { Field, reduxForm, reset } from 'redux-form';
 class AddressForm extends Component {
     render() {
         const { handleSubmit } = this.props;
+
         return (
             <form onSubmit={handleSubmit}>
                 <div className="form-group col-md-6">

@@ -48,7 +48,7 @@ export default class Homepage extends React.Component {
                     </div>
 
                     <div className="col-md-6">
-                        <GoogleMap/>
+                        <GoogleMap fetchLocationFromLatLng={this.props.fetchLocationFromLatLng}/>
                     </div>
                 </div>
 
