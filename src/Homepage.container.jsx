@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {map, keys} from 'lodash';
 import {HomepageStateToPropsBinding, HomepageDispatchToPropsBinding} from "./Homepage.bindings.jsx";
 import AddressForm from './components/AddressForm.component.jsx';
+import AddressList from './components/AddressList.component.jsx';
 import GoogleMap from './components/GoogleMap.component';
 import Suggestion from './components/Suggestion.component';
 import {forEach, some} from 'lodash';
@@ -100,35 +101,7 @@ export default class Homepage extends React.Component {
                     </div>
                 </div>
 
-                <table className="table table-bordered table-striped" style={{marginTop: 30}}>
-                    <thead>
-                    <tr>
-                        <th>Street Name</th>
-                        <th>Ward</th>
-                        <th>District</th>
-                        <th>City</th>
-                        <th>Country</th>
-                        <th>&nbsp;</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {
-                        map(this.state.addressList, (e, index) => {
-                            return <tr key={index}>
-                                <td>{e.streetName}</td>
-                                <td>{e.ward}</td>
-                                <td>{e.district}</td>
-                                <td>{e.city}</td>
-                                <td>{e.country}</td>
-                                <td style={{textAlign: 'center'}}>
-                                    <button className="btn btn-danger" onClick={() => this.remove(e.id)}>Remove</button>&nbsp;
-                                    <button className="btn btn-primary">Edit</button>
-                                </td>
-                            </tr>
-                        })
-                    }
-                    </tbody>
-                </table>
+                <AddressList addressList={this.state.addressList} onRemove={::this.remove}/>
             </div>
         )
     }
