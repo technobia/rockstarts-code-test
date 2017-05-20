@@ -2,6 +2,8 @@
  * Created by apium on 20/05/2017.
  */
 import React, { Component } from 'react';
+import {fetchLocationFromLatLng} from '../services/Google.service';
+import {decorateLocation} from '../services/Location.service'
 
 export default class AddressRow extends Component {
     constructor(props) {
@@ -28,6 +30,14 @@ export default class AddressRow extends Component {
         this.setState({rowData});
     };
 
+    onGetCurrentLocation = () => {
+        navigator.geolocation.getCurrentPosition(data => {
+            fetchLocationFromLatLng({lat: data.coords.latitude, lng: data.coords.longitude})
+                .then(resp => decorateLocation(resp.locationData))
+                .then(rowData => ::this.setState({rowData}));
+        });
+    };
+
     render() {
         let {element} = this.props;
         let {isOpenEdit, rowData} = this.state;
@@ -51,7 +61,7 @@ export default class AddressRow extends Component {
                 </td>
                 <td style={{textAlign: 'center'}}>
                     <button className="btn btn-info" type="submit">Update</button>
-                    <div className="btn btn-success" style={{marginTop: 5}}>Get Current Location</div>
+                    <div className="btn btn-success" style={{marginTop: 5}} onClick={::this.onGetCurrentLocation}>Get Current Location</div>
                 </td>
             </tr>
             :

@@ -6,7 +6,7 @@ import AddressForm from './components/AddressForm.component.jsx';
 import AddressList from './components/AddressList.component.jsx';
 import GoogleMap from './components/GoogleMap.component';
 import Suggestion from './components/Suggestion.component';
-import {forEach, some} from 'lodash';
+import {decorateLocation} from './services/Location.service';
 
 @connect(HomepageStateToPropsBinding, HomepageDispatchToPropsBinding)
 export default class Homepage extends React.Component {
@@ -24,7 +24,7 @@ export default class Homepage extends React.Component {
     componentWillReceiveProps(nextProps) {
         this.setState({
             addressList: nextProps.addressList,
-            formData: this.decorateLocation(nextProps.locationData)
+            formData: decorateLocation(nextProps.locationData)
         });
     }
 
@@ -33,37 +33,6 @@ export default class Homepage extends React.Component {
             if (resp.success) this.props.fetchAddressList()
         });
     };
-
-    decorateLocation(locationData) {
-        let result = {
-            streetName: '',
-            ward: '',
-            district: '',
-            city: '',
-            country: ''
-        };
-        !!locationData && forEach(locationData[0].address_components, (e) => {
-            if (some(e.types, (text) => text === 'street_number')) {
-                result.streetName += e.long_name;
-            }
-            if (some(e.types, (text) => text === 'route')) {
-                result.streetName += ' ' + e.long_name;
-            }
-            if (some(e.types, (text) => text === 'sublocality_level_1')) {
-                result.ward += ' ' + e.long_name;
-            }
-            if (some(e.types, (text) => text === 'administrative_area_level_2')) {
-                result.district += ' ' + e.long_name;
-            }
-            if (some(e.types, (text) => text === 'administrative_area_level_1')) {
-                result.city += ' ' + e.long_name;
-            }
-            if (some(e.types, (text) => text === 'country')) {
-                result.country += ' ' + e.long_name;
-            }
-        });
-        return result;
-    }
 
     remove(id) {
         this.props.removeAddressRow(id).then(resp => {
