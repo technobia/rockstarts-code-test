@@ -82,7 +82,7 @@ export default class Homepage extends React.Component {
                     <div className="col-md-6">
                         <div className="panel panel-success">
                             <div className="panel-heading">Add address with click on google map</div>
-                            <div className="panel-body">
+                            <div className="panel-body" style={{padding: 0}}>
                                 <GoogleMap fetchLocationFromLatLng={this.props.fetchLocationFromLatLng}/>
                             </div>
                         </div>
