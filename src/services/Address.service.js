@@ -20,6 +20,27 @@ firebase.initializeApp({
     messagingSenderId: "342248828272"
 });
 
+export function fetchAddressList() {
+    const address = firebase.database().ref('/addressList').once('value');
+    return address.then(resp => fetchAddressListSuccess(makeAddressList(resp)));
+}
+
+export function createAddressRow(formData) {
+    return writeAddress(formData, Guid())
+        .then(createAddressSuccess);
+}
+
+export function removeAddressRow(addressId) {
+    return removeAddress(addressId)
+        .then(removeAddressSuccess);
+}
+
+export function updateAddressRow(data) {
+    let addressId = data.id || '';
+    return writeAddress(data, addressId)
+        .then(updateAddressSuccess);
+}
+
 const fetchAddressListSuccess = (addressList) => {
     return {
         type: FETCH_ADDRESS_SUCCESS,
@@ -48,26 +69,6 @@ const removeAddressSuccess = () => {
     };
 };
 
-export function fetchAddressList() {
-    const address = firebase.database().ref('/addressList').once('value');
-    return address.then(resp => fetchAddressListSuccess(makeAddressList(resp)));
-}
-
-export function createAddressRow(formData) {
-    return writeAddress(formData, Guid())
-        .then(createAddressSuccess);
-}
-
-export function removeAddressRow(addressId) {
-    return removeAddress(addressId)
-        .then(removeAddressSuccess);
-}
-
-export function updateAddressRow(data) {
-    let addressId = data.id || '';
-    return writeAddress(data, addressId)
-        .then(updateAddressSuccess);
-}
 
 const makeAddressList = (resp) => {
     const result = [];
