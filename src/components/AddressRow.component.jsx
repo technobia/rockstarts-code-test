@@ -2,16 +2,59 @@
  * Created by apium on 20/05/2017.
  */
 import React, { Component } from 'react';
-import {map} from 'lodash';
 
 export default class AddressRow extends Component {
-    edit = (e) => this.props.onEdit(e);
+    constructor(props) {
+        super(props);
+        this.state = {
+            isOpenEdit: false,
+            rowData: {
+                streetName: this.props.element.streetName,
+                ward: this.props.element.ward,
+                district: this.props.element.district,
+                city: this.props.element.city,
+                country: this.props.element.country
+            }
+        };
+    }
+
+    edit = () => this.setState({isOpenEdit: true});
 
     remove = (id) => this.props.onRemove(id);
 
+    onChangeField = event => {
+        this.state.rowData[event.target.name] = event.target.value;
+        let rowData = this.state.rowData;
+        this.setState({rowData});
+    };
+
     render() {
         let {element} = this.props;
+        let {isOpenEdit, rowData} = this.state;
         return (
+            isOpenEdit ?
+            <tr>
+                <td>
+                    <input name="streetName" type="text" value={rowData.streetName} className="form-control" onChange={::this.onChangeField}/>
+                </td>
+                <td>
+                    <input name="ward" type="text" value={rowData.ward} className="form-control" onChange={::this.onChangeField}/>
+                </td>
+                <td>
+                    <input name="district" type="text" value={rowData.district} className="form-control" onChange={::this.onChangeField}/>
+                </td>
+                <td>
+                    <input name="city" type="text" value={rowData.city} className="form-control" onChange={::this.onChangeField}/>
+                </td>
+                <td>
+                    <input name="country" type="text" value={rowData.country} className="form-control" onChange={::this.onChangeField}/>
+                </td>
+                <td style={{textAlign: 'center'}}>
+                    <button className="btn btn-info" type="submit">Update</button>
+                    <div className="btn btn-success" style={{marginTop: 5}}>Get Current Location</div>
+                </td>
+            </tr>
+            :
             <tr>
                 <td>{element.streetName}</td>
                 <td>{element.ward}</td>
@@ -19,8 +62,8 @@ export default class AddressRow extends Component {
                 <td>{element.city}</td>
                 <td>{element.country}</td>
                 <td style={{textAlign: 'center'}}>
-                    <button className="btn btn-danger" onClick={() => this.remove(element.id)}>Remove</button>&nbsp;
-                    <button className="btn btn-primary" onClick={() => this.edit(element)}>Edit</button>
+                    <div className="btn btn-danger" onClick={() => this.remove(element.id)}>Remove</div>&nbsp;
+                    <div className="btn btn-primary" onClick={() => this.edit()}>Edit</div>
                 </td>
             </tr>
         )
