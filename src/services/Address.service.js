@@ -20,33 +20,33 @@ firebase.initializeApp({
     messagingSenderId: "342248828272"
 });
 
-export function fetchAddressListSuccess(addressList) {
+const fetchAddressListSuccess = (addressList) => {
     return {
         type: FETCH_ADDRESS_SUCCESS,
         addressList: addressList
     };
-}
+};
 
-export function createAddressSuccess() {
+const createAddressSuccess = () => {
     return {
         type: CREATE_ADDRESS_SUCCESS,
         success: true
     };
-}
+};
 
-export function updateAddressSuccess() {
+const updateAddressSuccess = () => {
     return {
         type: UPDATE_ADDRESS_SUCCESS,
         success: true
     };
-}
+};
 
-export function removeAddressSuccess() {
+const removeAddressSuccess = () => {
     return {
         type: REMOVE_ADDRESS_SUCCESS,
         success: true
     };
-}
+};
 
 export function fetchAddressList() {
     const address = firebase.database().ref('/addressList').once('value');
