@@ -61,7 +61,7 @@ export default class AddressRow extends Component {
                 </td>
                 <td style={{textAlign: 'center'}}>
                     <button className="btn btn-info" type="submit">Update</button>
-                    <div className="btn btn-success" style={{marginTop: 5}} onClick={::this.onGetCurrentLocation}>Get Current Location</div>
+                    <button className="btn btn-success" style={{marginTop: 5}} onClick={::this.onGetCurrentLocation}>Get Current Location</button>
                 </td>
             </tr>
             :
@@ -72,8 +72,8 @@ export default class AddressRow extends Component {
                 <td>{element.city}</td>
                 <td>{element.country}</td>
                 <td style={{textAlign: 'center'}}>
-                    <div className="btn btn-danger" onClick={() => this.remove(element.id)}>Remove</div>&nbsp;
-                    <div className="btn btn-primary" onClick={() => this.edit()}>Edit</div>
+                    <button className="btn btn-danger" onClick={() => this.remove(element.id)}>Remove</button>&nbsp;
+                    <button className="btn btn-primary" onClick={() => this.edit()}>Edit</button>
                 </td>
             </tr>
         )
