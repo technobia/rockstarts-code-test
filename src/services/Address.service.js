@@ -122,6 +122,9 @@ const removeAddress = (addressId) => {
     return firebase.database().ref('addressList/' + addressId).remove();
 };
 
+/**
+ * @return {string}
+ */
 const Guid = () => {
     let s4 = () => {
         return Math.floor((1 + Math.random()) * 0x10000)
