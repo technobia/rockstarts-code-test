@@ -40,6 +40,14 @@ export default class Homepage extends React.Component {
         });
     }
 
+    onGetCurrentLocation = () => {
+        navigator.geolocation.getCurrentPosition(data => {
+            this.props.fetchLocationFromLatLng({lat: data.coords.latitude, lng: data.coords.longitude})
+                .then(resp => decorateLocation(resp.locationData))
+                .then(formData => ::this.setState({formData}));
+        });
+    };
+
     render() {
         return (
             <div className="row" style={{marginTop: 15}}>
@@ -51,6 +59,7 @@ export default class Homepage extends React.Component {
                             <div className="panel-body clearfix">
                                 <div className="row">
                                     <AddressForm onSubmit={::this.submit}
+                                                 onGetCurrentLocation={::this.onGetCurrentLocation}
                                                  initialValues={this.state.formData}/>
                                 </div>
                             </div>

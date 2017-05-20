@@ -7,7 +7,7 @@ import { Field, reduxForm, reset } from 'redux-form';
 
 class AddressForm extends Component {
     render() {
-        const { handleSubmit } = this.props;
+        const { handleSubmit, onGetCurrentLocation } = this.props;
         return (
             <form onSubmit={handleSubmit}>
                 <div className="form-group col-md-6">
@@ -30,9 +30,9 @@ class AddressForm extends Component {
                     <label className="control-label">Country</label>
                     <Field name="country" type="text" component="input" className="form-control"/>
                 </div>
-                <div className="clearfix"></div>
-                <div className="col-md-4 col-md-offset-4">
-                    <button className="btn btn-primary" style={{width: '100%'}} type="submit">Add</button>
+                <div className="col-md-8 col-md-offset-2">
+                    <div className="btn btn-success" onClick={() => onGetCurrentLocation()}>Get Current Location</div>
+                    <button className="btn btn-primary" type="submit" style={{marginLeft: 5, width: 90}}>Add</button>
                 </div>
             </form>
         )
