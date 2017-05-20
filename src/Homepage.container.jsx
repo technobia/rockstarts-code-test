@@ -55,7 +55,7 @@ export default class Homepage extends React.Component {
     render() {
         let total = this.state.addressList ? this.state.addressList.length : 0;
         return (
-            <div className="row" style={{marginTop: 15}}>
+            <div className="row">
                 <div className="row">
                     <div className="col-md-6">
                         <div className="panel panel-default">
