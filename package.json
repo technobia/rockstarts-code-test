@@ -12,6 +12,7 @@
     "express": "4.14.0",
     "firebase": "3.9.0",
     "jquery": "3.2.1",
+    "json2csv": "^3.7.3",
     "lodash": "4.16.3",
     "node-sass": "4.5.3",
     "npm": "4.6.1",
@@ -43,7 +44,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prestart": "./node_modules/.bin/grunt build",
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "./node_modules/.bin/grunt default"
   },
   "repository": {
     "type": "git",
