@@ -48,6 +48,10 @@ export default class Homepage extends React.Component {
         });
     };
 
+    onExportCSV = () => {
+
+    };
+
     render() {
         let total = this.state.addressList ? this.state.addressList.length : 0;
         return (
@@ -87,7 +91,7 @@ export default class Homepage extends React.Component {
 
                 <div className="col-md-12 row">
                     You have <span className="text-primary"><strong>{total}</strong></span> address in store
-                    <button className="btn btn-success btn-sm" style={{marginLeft: 10}}>Export to CSV</button>
+                    <button className="btn btn-success btn-sm" style={{marginLeft: 10}} onClick={::this.onExportCSV}>Export to CSV</button>
                 </div>
                 <div className="clearfix"></div>
                 <AddressList addressList={this.state.addressList}
