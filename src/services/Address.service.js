@@ -10,14 +10,16 @@ import {
 } from '../Homepage.reducer';
 import * as _ from 'lodash';
 import * as firebase from 'firebase';
+import 'whatwg-fetch';
+import json2csv from 'json2csv';
 
 firebase.initializeApp({
-    apiKey: "AIzaSyDVLayZJXrdU7ht7taArLocwXk6wxqSB-c",
-    authDomain: "rockstarts-code-test.firebaseapp.com",
-    databaseURL: "https://rockstarts-code-test.firebaseio.com",
-    projectId: "rockstarts-code-test",
-    storageBucket: "rockstarts-code-test.appspot.com",
-    messagingSenderId: "342248828272"
+    apiKey: 'AIzaSyDVLayZJXrdU7ht7taArLocwXk6wxqSB-c',
+    authDomain: 'rockstarts-code-test.firebaseapp.com',
+    databaseURL: 'https://rockstarts-code-test.firebaseio.com',
+    projectId: 'rockstarts-code-test',
+    storageBucket: 'rockstarts-code-test.appspot.com',
+    messagingSenderId: '342248828272'
 });
 
 export function fetchAddressList() {
@@ -40,6 +42,30 @@ export function updateAddressRow(data) {
     return writeAddress(data, addressId)
         .then(updateAddressSuccess);
 }
+
+export function fetchAddressListJson() {
+    return fetch('https://rockstarts-code-test.firebaseio.com/addressList.json')
+        .then(resp => resp.json())
+        .then(data => json2csv({data}, (err, csv) => {
+            if (err) console.log(err);
+            generateDownloadCSV(csv);
+        }));
+}
+
+const generateDownloadCSV = (csvString) => {
+    let blob = new Blob([csvString]);
+    if (window.navigator.msSaveOrOpenBlob)  // IE hack; see http://msdn.microsoft.com/en-us/library/ie/hh779016.aspx
+        window.navigator.msSaveBlob(blob, 'addressList.csv');
+    else
+    {
+        let a = window.document.createElement('a');
+        a.href = window.URL.createObjectURL(blob, {type: 'text/plain'});
+        a.download = 'addressList.csv';
+        document.body.appendChild(a);
+        a.click();  // IE: 'Access is denied'; see: https://connect.microsoft.com/IE/feedback/details/797361/ie-10-treats-blob-url-as-cross-origin-and-denies-access
+        document.body.removeChild(a);
+    }
+};
 
 const fetchAddressListSuccess = (addressList) => {
     return {
