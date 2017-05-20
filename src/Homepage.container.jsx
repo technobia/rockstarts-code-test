@@ -56,10 +56,10 @@ export default class Homepage extends React.Component {
         let total = this.state.addressList ? this.state.addressList.length : 0;
         return (
             <div className="row">
-                <div className="row">
+                <div className="row" style={{position: 'relative', zIndex: 1}}>
                     <div className="col-md-6">
                         <div className="panel panel-default">
-                            <div className="panel-heading">Add address with form</div>
+                            <div className="panel-heading">Add address with form <span className="text-danger"><i>(No field mandatory)</i></span></div>
 
                             <div className="panel-body clearfix">
                                 <div className="row">
@@ -89,11 +89,13 @@ export default class Homepage extends React.Component {
                     </div>
                 </div>
 
-                <div className="col-md-12 row">
-                    You have <span className="text-primary"><strong>{total}</strong></span> address in store
-                    {total > 0 && <button className="btn btn-success btn-sm"
-                            style={{marginLeft: 10}}
-                            onClick={::this.onExportCSV}>Export to CSV</button>}
+                <div className="row">
+                    <div className="col-md-12">
+                        You have <span className="text-primary"><strong>{total}</strong></span> address in store
+                        {total > 0 && <button className="btn btn-success btn-sm"
+                                              style={{marginLeft: 10}}
+                                              onClick={::this.onExportCSV}>Export to CSV</button>}
+                    </div>
                 </div>
                 <div className="clearfix"></div>
                 <AddressList addressList={this.state.addressList}
