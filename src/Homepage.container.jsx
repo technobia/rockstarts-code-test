@@ -75,7 +75,10 @@ export default class Homepage extends React.Component {
                     </div>
                 </div>
 
-                <AddressList addressList={this.state.addressList} onRemove={::this.remove}/>
+                <AddressList addressList={this.state.addressList}
+                             updateAddressRow={::this.props.updateAddressRow}
+                             fetchAddressList={::this.props.fetchAddressList}
+                             onRemove={::this.remove}/>
             </div>
         )
     }

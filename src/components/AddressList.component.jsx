@@ -11,7 +11,7 @@ export default class AddressList extends Component {
     }
 
     render() {
-        let {addressList, onRemove} = this.props;
+        let {addressList, onRemove, fetchAddressList, updateAddressRow} = this.props;
         return (
             <table className="table table-bordered table-striped" style={{marginTop: 30}}>
                 <colgroup>
@@ -35,7 +35,11 @@ export default class AddressList extends Component {
                 <tbody>
                 {
                     map(addressList, (e, index) => {
-                        return <AddressRow key={index} element={e} onRemove={onRemove}/>
+                        return <AddressRow key={index}
+                                           element={e}
+                                           onRemove={onRemove}
+                                           fetchAddressList={fetchAddressList}
+                                           updateAddressRow={updateAddressRow}/>
                     })
                 }
                 </tbody>

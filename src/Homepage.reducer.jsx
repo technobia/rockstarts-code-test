@@ -1,5 +1,6 @@
 export const FETCH_ADDRESS_SUCCESS = 'FETCH_ADDRESS_SUCCESS';
 export const CREATE_ADDRESS_SUCCESS = 'CREATE_ADDRESS_SUCCESS';
+export const UPDATE_ADDRESS_SUCCESS = 'UPDATE_ADDRESS_SUCCESS';
 export const REMOVE_ADDRESS_SUCCESS = 'REMOVE_ADDRESS_SUCCESS';
 export const FETCH_LOCATION_SUCCESS = 'FETCH_LOCATION_SUCCESS';
 
@@ -15,6 +16,8 @@ export default function Homepage(state = initialState, action)  {
             return {...state};
         case FETCH_LOCATION_SUCCESS:
             return {...state, locationData: action.locationData};
+        case UPDATE_ADDRESS_SUCCESS:
+            return {...state};
     }
 
     return state;

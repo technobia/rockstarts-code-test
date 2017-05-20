@@ -5,6 +5,7 @@
 import {
     FETCH_ADDRESS_SUCCESS,
     CREATE_ADDRESS_SUCCESS,
+    UPDATE_ADDRESS_SUCCESS,
     REMOVE_ADDRESS_SUCCESS
 } from '../Homepage.reducer';
 import * as _ from 'lodash';
@@ -33,6 +34,13 @@ export function createAddressSuccess() {
     };
 }
 
+export function updateAddressSuccess() {
+    return {
+        type: UPDATE_ADDRESS_SUCCESS,
+        success: true
+    };
+}
+
 export function removeAddressSuccess() {
     return {
         type: REMOVE_ADDRESS_SUCCESS,
@@ -46,13 +54,19 @@ export function fetchAddressList() {
 }
 
 export function createAddressRow(formData) {
-    return addAddress(formData, Guid())
+    return writeAddress(formData, Guid())
         .then(createAddressSuccess);
 }
 
 export function removeAddressRow(addressId) {
     return removeAddress(addressId)
         .then(removeAddressSuccess);
+}
+
+export function updateAddressRow(data) {
+    let addressId = data.id || '';
+    return writeAddress(data, addressId)
+        .then(updateAddressSuccess);
 }
 
 const makeAddressList = (resp) => {
@@ -66,7 +80,7 @@ const makeAddressList = (resp) => {
     return result;
 };
 
-const addAddress = (data, addressId) => {
+const writeAddress = (data, addressId) => {
     return firebase.database().ref('addressList/' + addressId).set({
         streetName: data.streetName,
         ward: data.ward,

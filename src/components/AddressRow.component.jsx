@@ -38,6 +38,14 @@ export default class AddressRow extends Component {
         });
     };
 
+    update = () => {
+        let data = {...this.state.rowData, id: this.props.element.id};
+        this.props.updateAddressRow(data).then(resp => {
+            this.state.isOpenEdit = false;
+            if (resp.success) this.props.fetchAddressList()
+        });
+    };
+
     render() {
         let {element} = this.props;
         let {isOpenEdit, rowData} = this.state;
@@ -60,7 +68,7 @@ export default class AddressRow extends Component {
                     <input name="country" type="text" value={rowData.country} className="form-control" onChange={::this.onChangeField}/>
                 </td>
                 <td style={{textAlign: 'center'}}>
-                    <button className="btn btn-info" type="submit">Update</button>
+                    <button className="btn btn-info" type="submit" onClick={::this.update}>Update</button>
                     <button className="btn btn-success" style={{marginTop: 5}} onClick={::this.onGetCurrentLocation}>Get Current Location</button>
                 </td>
             </tr>
