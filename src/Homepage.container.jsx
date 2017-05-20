@@ -56,7 +56,7 @@ export default class Homepage extends React.Component {
                             </div>
                         </div>
 
-                        <div className="panel panel-default" style={{marginTop: 15}}>
+                        <div className="panel panel-info" style={{marginTop: 15}}>
                             <div className="panel-heading">Add address with suggestion</div>
 
                             <div className="panel-body clearfix">
@@ -66,7 +66,12 @@ export default class Homepage extends React.Component {
                     </div>
 
                     <div className="col-md-6">
-                        <GoogleMap fetchLocationFromLatLng={this.props.fetchLocationFromLatLng}/>
+                        <div className="panel panel-success">
+                            <div className="panel-heading">Add address with click on google map</div>
+                            <div className="panel-body">
+                                <GoogleMap fetchLocationFromLatLng={this.props.fetchLocationFromLatLng}/>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
