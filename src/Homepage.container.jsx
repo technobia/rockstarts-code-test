@@ -87,7 +87,9 @@ export default class Homepage extends React.Component {
 
                 <div className="col-md-12 row">
                     You have <span className="text-primary"><strong>{total}</strong></span> address in store
+                    <button className="btn btn-success btn-sm" style={{marginLeft: 10}}>Export to CSV</button>
                 </div>
+                <div className="clearfix"></div>
                 <AddressList addressList={this.state.addressList}
                              updateAddressRow={::this.props.updateAddressRow}
                              fetchAddressList={::this.props.fetchAddressList}

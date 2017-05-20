@@ -13,7 +13,7 @@ export default class AddressList extends Component {
     render() {
         let {addressList, onRemove, fetchAddressList, updateAddressRow} = this.props;
         return (
-            <table className="table table-bordered table-striped" style={{marginTop: 30}}>
+            <table className="table table-bordered table-striped" style={{marginTop: 10}}>
                 <colgroup>
                     <col />
                     <col />
