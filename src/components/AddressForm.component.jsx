@@ -31,7 +31,7 @@ class AddressForm extends Component {
                     <Field name="country" type="text" component="input" className="form-control"/>
                 </div>
                 <div className="col-md-8 col-md-offset-2">
-                    <div className="btn btn-success" onClick={() => onGetCurrentLocation()}>Get Current Location</div>
+                    <div className="btn btn-success" onClick={::this.props.onGetCurrentLocation}>Get Current Location</div>
                     <button className="btn btn-primary" type="submit" style={{marginLeft: 5, width: 90}}>Add</button>
                 </div>
             </form>

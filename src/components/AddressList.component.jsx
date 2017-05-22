@@ -6,9 +6,6 @@ import {map} from 'lodash';
 import AddressRow from './AddressRow.component';
 
 export default class AddressList extends Component {
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         let {addressList, onRemove, fetchAddressList, updateAddressRow} = this.props;

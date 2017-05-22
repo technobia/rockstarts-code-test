@@ -40,10 +40,12 @@ export default class AddressRow extends Component {
 
     update = () => {
         let data = {...this.state.rowData, id: this.props.element.id};
-        this.props.updateAddressRow(data).then(resp => {
-            this.state.isOpenEdit = false;
-            if (resp.success) this.props.fetchAddressList()
-        });
+        this.props.updateAddressRow(data)
+            .then(resp => this.setState({isOpenEdit: false}, this.updateSuccess(resp)));
+    };
+
+    updateSuccess = (resp) => {
+        if (resp.success) this.props.fetchAddressList()
     };
 
     render() {
